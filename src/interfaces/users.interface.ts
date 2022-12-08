@@ -1,5 +1,7 @@
 export interface User {
   _id: string;
-  email: string;
-  password: string;
+  scenario_id: string;
+  nickname: string;
+  scenario_start_time: Date;
+  messages: [string];
 }
