@@ -1,15 +1,15 @@
 import { model, Schema, Document } from 'mongoose';
 import { User } from '@interfaces/users.interface';
-import { UserMessage } from '@interfaces/user-message.interface';
+// import { UserMessage } from '@interfaces/user-message.interface';
 
 const userSchema: Schema = new Schema({
-  id: {
-    type: Date,
-    require: true,
-    unique: true,
-  },
+  // id: {
+  //   type: String,
+  //   require: true,
+  //   unique: true,
+  // },
   scenario_id: {
-    type: Date,
+    type: String,
     require: true,
     unique: false, // it is not unique per user.
   },

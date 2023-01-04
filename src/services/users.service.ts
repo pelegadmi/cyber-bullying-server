@@ -3,6 +3,7 @@ import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
+import mongoose from 'mongoose';
 
 class UserService {
   public users = userModel;
@@ -23,10 +24,15 @@ class UserService {
   public async createUser(userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
 
-    const findUser: User = await this.users.findOne({ email: userData._id });
-    if (findUser) throw new HttpException(409, `This id ${userData._id} already exists`);
+    // const findUser: User = await this.users.findOne({ _id: userData._id });
+    // if (findUser) throw new HttpException(409, `This id ${userData._id} already exists`);
 
-    return await this.users.create({ userData });
+    return await this.users.create({
+      ...userData,
+      scenario_start_time: Date.now(),
+      scenario_id: '123',
+      messages: [],
+    }); // todo fixme
   }
 
   public async updateUser(userId: string, userData: CreateUserDto): Promise<User> {

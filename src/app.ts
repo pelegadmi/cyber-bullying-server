@@ -5,7 +5,7 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
-import { connect, set } from 'mongoose';
+import mongoose from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
@@ -45,16 +45,31 @@ class App {
   }
 
   private connectToDatabase() {
-    if (this.env !== 'production') {
-      set('debug', true);
-    }
+    // if (this.env !== 'production') {
+    //   set('debug', true);
+    // }
+    //
+    // connect(dbConnection.url, dbConnection.options);
+    const db = mongoose.connection;
 
-    connect(dbConnection.url, dbConnection.options);
+    db.on('connected', () => {
+      console.log('DB connected!');
+    }),
+      db.on('disconnected', () => {
+        console.log('DB disconnected! Trying to reconnect...');
+        mongoose.connect(dbConnection.url, dbConnection.options);
+      });
+    db.on('error', error => {
+      console.log('DB connection error : ' + error);
+    });
+
+    mongoose.connect(dbConnection.url, dbConnection.options).catch(error => console.log('DB connection error : ' + error));
   }
 
   private initializeMiddlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(cors());
+    // this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
