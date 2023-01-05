@@ -1,9 +1,8 @@
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
-import mongoose from 'mongoose';
 
 class UserService {
   public users = userModel;
@@ -24,26 +23,23 @@ class UserService {
   public async createUser(userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
 
-    // const findUser: User = await this.users.findOne({ _id: userData._id });
-    // if (findUser) throw new HttpException(409, `This id ${userData._id} already exists`);
-
     return await this.users.create({
       ...userData,
       scenario_start_time: Date.now(),
-      scenario_id: '123',
       messages: [],
-    }); // todo fixme
+    });
   }
 
-  public async updateUser(userId: string, userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
+  public async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<User> {
+    if (isEmpty(updateUserDto)) throw new HttpException(400, 'userData is empty');
 
-    if (userData._id) {
-      const findUser: User = await this.users.findOne({ email: userData._id });
-      if (findUser && findUser._id != userId) throw new HttpException(409, `This id ${userData._id} already exists`);
-    }
+    const findUser: User = await this.findUserById(userId);
 
-    const updateUserById: User = await this.users.findByIdAndUpdate(userId, { userData });
+    const updateUserById: User = await this.users.findByIdAndUpdate(userId, {
+      ...updateUserDto,
+      scenario_start_time: findUser.scenario_start_time,
+    });
+
     if (!updateUserById) throw new HttpException(409, "User doesn't exist");
 
     return updateUserById;
