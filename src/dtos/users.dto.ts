@@ -5,6 +5,6 @@ export class CreateUserDto {
   public nickname: string;
   //todo add scenarioid,
 
-  // @IsString()
-  // public _id: string;
+  @IsString()
+  public scenario_id: string;
 }
