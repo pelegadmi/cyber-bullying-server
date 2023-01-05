@@ -45,11 +45,6 @@ class App {
   }
 
   private connectToDatabase() {
-    // if (this.env !== 'production') {
-    //   set('debug', true);
-    // }
-    //
-    // connect(dbConnection.url, dbConnection.options);
     const db = mongoose.connection;
 
     db.on('connected', () => {
@@ -69,7 +64,6 @@ class App {
   private initializeMiddlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }));
     this.app.use(cors());
-    // this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
