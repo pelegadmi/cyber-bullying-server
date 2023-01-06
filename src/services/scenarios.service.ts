@@ -3,7 +3,6 @@ import { isEmpty } from '@utils/util';
 import { Scenario } from '@interfaces/scenario.interface';
 import scenarioModel from '@models/scenario.model';
 import { CreateScenarioDto } from '@dtos/scenario.dto';
-import { User } from '@interfaces/users.interface';
 
 class ScenarioService {
   public scenarios = scenarioModel;
@@ -30,7 +29,7 @@ class ScenarioService {
   }
 
   public async updateScenario(scenarioId: string, createScenarioDto: CreateScenarioDto): Promise<Scenario> {
-    if (isEmpty(createScenarioDto)) throw new HttpException(400, 'userData is empty');
+    if (isEmpty(createScenarioDto)) throw new HttpException(400, 'createScenarioDto is empty');
 
     const updateUserById: Scenario = await this.scenarios.findByIdAndUpdate(scenarioId, {
       ...createScenarioDto,

@@ -3,11 +3,6 @@ import { User } from '@interfaces/users.interface';
 // import { UserMessage } from '@interfaces/user-message.interface';
 
 const userSchema: Schema = new Schema({
-  // id: {
-  //   type: String,
-  //   require: true,
-  //   unique: true,
-  // },
   scenario_id: {
     type: String,
     require: true,
