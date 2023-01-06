@@ -4,17 +4,14 @@ import { CommentType } from '@/enums/commentType.enum';
 import { Scenario } from '@interfaces/scenario.interface';
 
 const scenarioSchema: Schema = new Schema({
-  id: {
-    type: Date,
-    require: true,
-    unique: true,
-  },
   severity: {
-    type: Severity,
+    type: String,
+    enum: Severity,
     require: true,
   },
   comment_type: {
-    type: CommentType,
+    type: String,
+    enum: CommentType,
     require: true,
   },
   number_of_users: {
@@ -23,7 +20,7 @@ const scenarioSchema: Schema = new Schema({
   },
   messages: {
     type: [], // Array of ScenarioMessages
-    require: false, // might be null if user sent nothing.
+    require: true,
   },
 });
 

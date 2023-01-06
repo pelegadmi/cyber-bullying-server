@@ -15,7 +15,7 @@ class ScenarioService {
     if (isEmpty(scenarioId)) throw new HttpException(400, 'Scenario id is empty');
 
     const findScenario: Scenario = await this.scenarios.findOne({ _id: scenarioId });
-    if (!findScenario) throw new HttpException(409, "User doesn't exist");
+    if (!findScenario) throw new HttpException(409, "Scenario doesn't exist");
 
     return findScenario;
   }
@@ -35,7 +35,7 @@ class ScenarioService {
       ...createScenarioDto,
     });
 
-    if (!updateUserById) throw new HttpException(409, "User doesn't exist");
+    if (!updateUserById) throw new HttpException(409, "Scenario doesn't exist");
 
     return updateUserById;
   }
