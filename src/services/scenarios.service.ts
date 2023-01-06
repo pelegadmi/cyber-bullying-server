@@ -3,7 +3,7 @@ import { isEmpty } from '@utils/util';
 import { Scenario } from '@interfaces/scenario.interface';
 import scenarioModel from '@models/scenario.model';
 import { CreateScenarioDto } from '@dtos/scenario.dto';
-import {User} from "@interfaces/users.interface";
+import { User } from '@interfaces/users.interface';
 
 class ScenarioService {
   public scenarios = scenarioModel;
