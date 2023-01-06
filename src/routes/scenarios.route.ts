@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { Routes } from '@interfaces/routes.interface';
 import ScenariosController from '@controllers/scenarios.controller';
+import { Routes } from '@interfaces/routes.interface';
 
 class ScenariosRoute implements Routes {
   public path = '/scenarios';

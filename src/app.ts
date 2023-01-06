@@ -82,9 +82,9 @@ class App {
     const options = {
       swaggerDefinition: {
         info: {
-          title: 'REST API',
+          title: 'Cyber Bullying - REST API',
           version: '1.0.0',
-          description: 'Example docs',
+          description: 'Cyber Bullying Docs',
         },
       },
       apis: ['swagger.yaml'],
