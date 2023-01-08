@@ -1,4 +1,4 @@
 export interface UserMessage {
   Text: string;
-  time_offset: Date;
+  milliseconds_offset: number;
 }

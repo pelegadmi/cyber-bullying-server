@@ -2,6 +2,7 @@ import { model, Schema, Document } from 'mongoose';
 import { Severity } from '@/enums/severity.enum';
 import { CommentType } from '@/enums/commentType.enum';
 import { Scenario } from '@interfaces/scenario.interface';
+import scenarioMessageModel from '@models/scenario-messgae.model';
 
 const scenarioSchema: Schema = new Schema({
   severity: {
@@ -19,7 +20,7 @@ const scenarioSchema: Schema = new Schema({
     required: true,
   },
   messages: {
-    type: [], // Array of ScenarioMessages
+    type: [scenarioMessageModel], // Array of ScenarioMessages
     require: true,
   },
 });

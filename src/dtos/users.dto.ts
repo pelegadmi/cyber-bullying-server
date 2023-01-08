@@ -1,4 +1,5 @@
 import { IsString } from 'class-validator';
+import { UserMessage } from '@interfaces/user-message.interface';
 
 export class CreateUserDto {
   @IsString()
@@ -11,7 +12,7 @@ export class CreateUserDto {
 export class UpdateUserDto {
   @IsString()
   public nickname: string;
-  public messages: [string];
+  public messages: [message: UserMessage];
 
   @IsString()
   public scenario_id: string;
