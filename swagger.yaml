@@ -203,6 +203,37 @@ paths:
 
 # definitions
 definitions:
+
+  scenario-message:
+    type: object
+    required:
+      - text
+      - milliseconds-offset
+      - nickname
+    properties:
+      text:
+        type: string
+        description: message content
+      milliseconds-offset:
+        type: number
+        description: milliseconds from scenario start time
+      nickname:
+        type: string
+        description: sender's nickname
+
+  user-message:
+    type: object
+    required:
+      - text
+      - milliseconds-offset
+    properties:
+      text:
+        type: string
+        description: message content
+      milliseconds-offset:
+        type: number
+        description: milliseconds from scenario start time
+
   create-user-dto:
     type: object
     required:
@@ -229,7 +260,7 @@ definitions:
       messages:
         type: array
         items:
-          type: string
+          $ref: '#/definitions/user-message'
         description: user messages
       scenarioId:
         type: string
@@ -255,7 +286,7 @@ definitions:
       messages:
         type: array
         items:
-          type: string
+          $ref: '#/definitions/scenario-message'
         description: scenario messages
 
 schemes:

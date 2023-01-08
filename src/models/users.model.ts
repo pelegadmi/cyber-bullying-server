@@ -1,6 +1,6 @@
 import { model, Schema, Document } from 'mongoose';
 import { User } from '@interfaces/users.interface';
-import userMessageModel from '@models/user-messgae.model';
+import { UserMessage } from '@interfaces/user-message.interface';
 
 const userSchema: Schema = new Schema({
   scenario_id: {
@@ -17,7 +17,7 @@ const userSchema: Schema = new Schema({
     required: true,
   },
   messages: {
-    type: [userMessageModel],
+    type: Array<UserMessage>(),
     require: false, // might be null if user sent nothing.
   },
 });
