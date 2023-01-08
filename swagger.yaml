@@ -1,6 +1,8 @@
 tags:
 - name: users
   description: users API
+- name: scenarios
+  description: scenarios API
 
 paths:
 # [GET] users
