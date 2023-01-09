@@ -10,5 +10,5 @@ export class CreateScenarioDto {
   @IsNumber()
   public numberOfUsers: Number;
 
-  public messages: [message: ScenarioMessage];
+  public messages: Array<ScenarioMessage>;
 }

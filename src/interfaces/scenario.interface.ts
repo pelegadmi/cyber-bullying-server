@@ -6,5 +6,5 @@ export interface Scenario {
   severity: Severity;
   commentType: CommentType;
   numberOfUsers: Number;
-  message: Array<ScenarioMessage>;
+  messages: Array<ScenarioMessage>;
 }

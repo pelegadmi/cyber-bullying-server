@@ -10,12 +10,12 @@ const scenarioSchema: Schema = new Schema({
     enum: Severity,
     require: true,
   },
-  comment_type: {
+  commentType: {
     type: String,
     enum: CommentType,
     require: true,
   },
-  number_of_users: {
+  numberOfUsers: {
     type: Number,
     required: true,
   },

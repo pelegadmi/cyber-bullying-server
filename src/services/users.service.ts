@@ -3,6 +3,7 @@ import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
+import { UserMessage } from '@interfaces/user-message.interface';
 
 class UserService {
   public users = userModel;
@@ -26,7 +27,7 @@ class UserService {
     return await this.users.create({
       ...userData,
       scenario_start_time: Date.now(),
-      messages: [],
+      messages: Array<UserMessage>(),
     });
   }
 

@@ -1,5 +1,5 @@
 export interface ScenarioMessage {
-  Text: string;
+  text: string;
   milliseconds_offset: number;
   nickname: string;
 }

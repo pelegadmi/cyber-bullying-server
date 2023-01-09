@@ -3,6 +3,7 @@ import { isEmpty } from '@utils/util';
 import { Scenario } from '@interfaces/scenario.interface';
 import scenarioModel from '@models/scenario.model';
 import { CreateScenarioDto } from '@dtos/scenario.dto';
+import { ScenarioMessage } from '@interfaces/scenario-message.interface';
 
 class ScenarioService {
   public scenarios = scenarioModel;
@@ -20,11 +21,11 @@ class ScenarioService {
     return findScenario;
   }
 
-  public async createScenario(scenarioDto: CreateScenarioDto): Promise<Scenario> {
-    if (isEmpty(scenarioDto)) throw new HttpException(400, 'Scenario Data is empty');
+  public async createScenario(createScenarioDto: CreateScenarioDto): Promise<Scenario> {
+    if (isEmpty(createScenarioDto)) throw new HttpException(400, 'Scenario Data is empty');
 
     return await this.scenarios.create({
-      ...scenarioDto,
+      ...createScenarioDto,
     });
   }
 

@@ -208,13 +208,13 @@ definitions:
     type: object
     required:
       - text
-      - milliseconds-offset
+      - milliseconds_offset
       - nickname
     properties:
       text:
         type: string
         description: message content
-      milliseconds-offset:
+      milliseconds_offset:
         type: number
         description: milliseconds from scenario start time
       nickname:
@@ -225,12 +225,12 @@ definitions:
     type: object
     required:
       - text
-      - milliseconds-offset
+      - milliseconds_offset
     properties:
       text:
         type: string
         description: message content
-      milliseconds-offset:
+      milliseconds_offset:
         type: number
         description: milliseconds from scenario start time
 

@@ -12,7 +12,7 @@ export class CreateUserDto {
 export class UpdateUserDto {
   @IsString()
   public nickname: string;
-  public messages: [message: UserMessage];
+  public messages: Array<UserMessage>;
 
   @IsString()
   public scenario_id: string;
