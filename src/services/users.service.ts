@@ -46,12 +46,14 @@ class UserService {
     return updateUserById;
   }
 
-  public async addUserMessage(userId: string, addUserMessageDto: AddUserMessageDto): Promise<User> {
+  public async addUserMessages(userId: string, addUserMessageDto: AddUserMessageDto): Promise<User> {
     if (isEmpty(addUserMessageDto)) throw new HttpException(400, 'messages array is empty');
 
     const findUser: User = await this.findUserById(userId);
 
-    const combinedMessages = findUser.messages.push(...addUserMessageDto.messages);
+    const combinedMessages = findUser.messages;
+    combinedMessages.push(...addUserMessageDto.messages);
+
     const updateUserById: User = await this.users.findByIdAndUpdate(userId, {
       messages: combinedMessages,
       scenario_start_time: findUser.scenario_start_time,
@@ -61,7 +63,7 @@ class UserService {
 
     if (!updateUserById) throw new HttpException(409, "User doesn't exist");
 
-    return updateUserById;
+    return { ...updateUserById, messages: combinedMessages };
   }
 
   public async deleteUser(userId: string): Promise<User> {

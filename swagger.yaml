@@ -104,6 +104,32 @@ paths:
         500:
           description: 'Server Error'
 
+  /users/update-messages/{id}:
+    # [PUT] users/update-messages/id
+    put:
+      tags:
+        - users
+      summary: Update User By Id
+      parameters:
+        - name: id
+          in: path
+          description: user Id
+          required: true
+        - name: body
+          in: body
+          description: update user dto
+          required: true
+          schema:
+            $ref: '#/definitions/add-user-messages-dto'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
 
   /scenarios:
     get:
@@ -202,7 +228,6 @@ paths:
           description: 'Server Error'
 
   /admin:
-
     # [POST] users
     post:
       tags:
@@ -295,6 +320,17 @@ definitions:
       scenarioId:
         type: string
         description: user scenario id
+
+  add-user-messages-dto:
+    type: object
+    required:
+      - messages
+    properties:
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/user-message'
+        description: user messages
 
   create-scenario-dto:
     type: object
