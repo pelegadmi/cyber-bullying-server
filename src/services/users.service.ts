@@ -1,4 +1,4 @@
-import { CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
+import { AddUserMessageDto, CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
@@ -39,6 +39,24 @@ class UserService {
     const updateUserById: User = await this.users.findByIdAndUpdate(userId, {
       ...updateUserDto,
       scenario_start_time: findUser.scenario_start_time,
+    });
+
+    if (!updateUserById) throw new HttpException(409, "User doesn't exist");
+
+    return updateUserById;
+  }
+
+  public async addUserMessage(userId: string, addUserMessageDto: AddUserMessageDto): Promise<User> {
+    if (isEmpty(addUserMessageDto)) throw new HttpException(400, 'messages array is empty');
+
+    const findUser: User = await this.findUserById(userId);
+
+    const combinedMessages = findUser.messages.push(...addUserMessageDto.messages);
+    const updateUserById: User = await this.users.findByIdAndUpdate(userId, {
+      messages: combinedMessages,
+      scenario_start_time: findUser.scenario_start_time,
+      scenario_id: findUser.scenario_id,
+      nickname: findUser.nickname,
     });
 
     if (!updateUserById) throw new HttpException(409, "User doesn't exist");

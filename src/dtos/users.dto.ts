@@ -17,3 +17,6 @@ export class UpdateUserDto {
   @IsString()
   public scenario_id: string;
 }
+export class AddUserMessageDto {
+  public messages: Array<UserMessage>;
+}
