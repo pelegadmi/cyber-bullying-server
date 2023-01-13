@@ -3,6 +3,8 @@ tags:
   description: users API
 - name: scenarios
   description: scenarios API
+- name: admin
+  description: admin API
 
 paths:
 # [GET] users
@@ -199,10 +201,38 @@ paths:
         500:
           description: 'Server Error'
 
+  /admin:
+
+    # [POST] users
+    post:
+      tags:
+        - admin
+      summary: Admin Login
+      parameters:
+        - name: body
+          in: body
+          description: admin login dto
+          required: true
+          schema:
+            $ref: '#/definitions/admin-login-dto'
+      responses:
+        201:
+          description: 'Logged in'
+        400:
+          description: 'Password incorrect'
+
 
 
 # definitions
 definitions:
+  admin-login-dto:
+    type: object
+    required:
+      - password
+    properties:
+      password:
+        type: string
+        description: admin password
 
   scenario-message:
     type: object
