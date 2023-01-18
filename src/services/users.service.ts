@@ -21,11 +21,12 @@ class UserService {
     return findUser;
   }
 
-  public async createUser(userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
+  public async createUser(createUserDto: CreateUserDto): Promise<User> {
+    if (isEmpty(createUserDto)) throw new HttpException(400, 'createUserDto is empty');
 
     return await this.users.create({
-      ...userData,
+      ...createUserDto,
+      scenario_id: '1', // todo calculate scenario_id
       scenario_start_time: Date.now(),
       messages: Array<UserMessage>(),
     });

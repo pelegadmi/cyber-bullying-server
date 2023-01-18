@@ -4,9 +4,6 @@ import { UserMessage } from '@interfaces/user-message.interface';
 export class CreateUserDto {
   @IsString()
   public nickname: string;
-
-  @IsString()
-  public scenario_id: string;
 }
 
 export class UpdateUserDto {

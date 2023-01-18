@@ -34,6 +34,7 @@ class ScenarioService {
 
     const updateUserById: Scenario = await this.scenarios.findByIdAndUpdate(scenarioId, {
       ...createScenarioDto,
+
     });
 
     if (!updateUserById) throw new HttpException(409, "Scenario doesn't exist");
