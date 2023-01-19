@@ -331,11 +331,15 @@ definitions:
   create-scenario-dto:
     type: object
     required:
+      - tag
       - severity
       - commentType
       - numberOfUsers
       - messages
     properties:
+      tag:
+        type: string
+        description: scenario's name
       severity:
         type: string
         description: scenario's severity

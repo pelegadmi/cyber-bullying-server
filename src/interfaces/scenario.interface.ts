@@ -4,6 +4,7 @@ import { ScenarioMessage } from '@interfaces/scenario-message.interface';
 
 export interface Scenario {
   _id: any;
+  tag: string;
   severity: Severity;
   commentType: CommentType;
   creationDate: Date;

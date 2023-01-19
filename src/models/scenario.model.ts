@@ -5,6 +5,10 @@ import { Scenario } from '@interfaces/scenario.interface';
 import { ScenarioMessage } from '@interfaces/scenario-message.interface';
 
 const scenarioSchema: Schema = new Schema({
+  tag: {
+    type: String,
+    require: true,
+  },
   severity: {
     type: String,
     enum: Severity,
