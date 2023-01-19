@@ -3,6 +3,7 @@ import { CommentType } from '@/enums/commentType.enum';
 import { ScenarioMessage } from '@interfaces/scenario-message.interface';
 
 export interface Scenario {
+  _id: any;
   severity: Severity;
   commentType: CommentType;
   numberOfUsers: Number;

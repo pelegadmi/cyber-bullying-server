@@ -1,4 +1,4 @@
-import App from '@/app';
+import App from './app';
 import UsersRoute from '@routes/users.route';
 import ScenariosRoute from '@routes/scenarios.route';
 import validateEnv from '@utils/validateEnv';

@@ -1,5 +1,8 @@
 {
   "name": "cyber-bullying-server",
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
   "version": "0.0.0",
   "description": "TypeScript + Mongoose + MongoDB + Express API Server",
   "author": "",
@@ -71,6 +74,6 @@
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.9.3"
   }
 }

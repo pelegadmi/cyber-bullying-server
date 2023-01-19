@@ -4,9 +4,11 @@ import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
 import { UserMessage } from '@interfaces/user-message.interface';
+import ScenarioIdRetriever from '@utils/user/scenarioIdRetriever';
 
 class UserService {
   public users = userModel;
+  private scenarioRetriever = new ScenarioIdRetriever();
 
   public async findAllUser(): Promise<User[]> {
     return this.users.find();
@@ -23,10 +25,10 @@ class UserService {
 
   public async createUser(createUserDto: CreateUserDto): Promise<User> {
     if (isEmpty(createUserDto)) throw new HttpException(400, 'createUserDto is empty');
-
+    const scenarioId = await this.scenarioRetriever.retrieve();
     return await this.users.create({
       ...createUserDto,
-      scenario_id: '1', // todo calculate scenario_id
+      scenario_id: scenarioId,
       scenario_start_time: Date.now(),
       messages: Array<UserMessage>(),
     });
