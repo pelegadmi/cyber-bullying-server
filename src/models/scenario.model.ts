@@ -15,6 +15,10 @@ const scenarioSchema: Schema = new Schema({
     enum: CommentType,
     require: true,
   },
+  creationDate: {
+    type: Date,
+    required: true,
+  },
   numberOfUsers: {
     type: Number,
     required: true,

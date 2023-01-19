@@ -6,6 +6,7 @@ export interface Scenario {
   _id: any;
   severity: Severity;
   commentType: CommentType;
+  creationDate: Date;
   numberOfUsers: Number;
   messages: Array<ScenarioMessage>;
 }
