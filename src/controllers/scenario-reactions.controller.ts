@@ -13,9 +13,9 @@ class ScenarioReactionsController {
     try {
       const scenarioId = req.params.id;
 
-      const scenarioReaction = this.toScenarioReaction(scenarioId);
+      const scenarioReaction: ScenarioReactionsDto = await this.toScenarioReaction(scenarioId);
 
-      res.status(200).json({ data: scenarioReaction, message: 'findAll' });
+      res.status(200).json({ data: scenarioReaction, message: 'findOne' });
     } catch (error) {
       next(error);
     }
@@ -40,10 +40,9 @@ class ScenarioReactionsController {
     const scenario: Scenario = await this.scenarioService.findScenarioById(scenarioId);
     const allUsers: User[] = await this.usersService.findAllUser();
 
-    const participants: User[] = allUsers.filter(user => user.scenario_id == scenarioId);
+    const participants: User[] = allUsers.filter(user => user.scenario_id === scenarioId);
 
-    const scenarioReaction: ScenarioReactionsDto = { scenario: scenario, participants: participants };
-    return scenarioReaction;
+    return { scenario: scenario, participants: participants };
   };
 }
 
