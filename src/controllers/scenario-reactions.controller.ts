@@ -26,8 +26,8 @@ class ScenarioReactionsController {
       const scenarios: Scenario[] = await this.scenarioService.findAllScenarios();
       const scenariosReactions = new Array<ScenarioReactionsDto>();
       for (const scenario of scenarios) {
-        const scenarioReaction = this.toScenarioReaction(scenario._id);
-        scenariosReactions.push(await scenarioReaction);
+        const scenarioReaction = await this.toScenarioReaction(scenario._id);
+        scenariosReactions.push(scenarioReaction);
       }
 
       res.status(200).json({ data: scenariosReactions, message: 'findAll' });

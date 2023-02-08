@@ -246,6 +246,36 @@ paths:
         400:
           description: 'Password incorrect'
 
+  /scenario-reactions:
+    # [GET] scenario-reactions
+    get:
+      tags:
+        - scenario-reactions
+      summary: Find All Scenario Reactions
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    # [GET] scenario-reactions/id
+  /scenario-reactions/{id}:
+    get:
+      tags:
+        - scenario-reactions
+      summary: Find Scenario Reaction By Id
+      parameters:
+        - name: id
+          in: path
+          description: Scenario Id
+          required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
 
 
 # definitions
@@ -354,6 +384,21 @@ definitions:
         items:
           $ref: '#/definitions/scenario-message'
         description: scenario messages
+
+  scenario-reaction-dto:
+    type: object
+    required:
+      - scenario
+      - participants
+    properties:
+      scenario:
+        type: object
+        description: scenario
+      participants:
+        type: array
+        items:
+          $ref: '#/definitions/update-user-dto'
+        description: scenarios' participants
 
 schemes:
  - https
