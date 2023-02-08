@@ -29,22 +29,26 @@ class ScenarioReactionsController {
 
       const scenariosReactions = new Array<ScenarioReactionsDto>();
       for (const scenario of scenarios) {
-        const scenarioReaction: ScenarioReactionsDto = await this.toScenarioReaction(scenario._id, allUsers);
+        const scenarioId = scenario._id.toString();
+        const scenarioReaction: ScenarioReactionsDto = await this.toScenarioReaction(scenarioId, allUsers);
         scenariosReactions.push(scenarioReaction);
       }
 
       res.status(200).json({ data: scenariosReactions, message: 'findAll' });
     } catch (error) {
       next(error);
-      res.status(500);
     }
   };
 
   private toScenarioReaction = async (scenarioId, allUsers) => {
-    const scenario: Scenario = await this.scenarioService.findScenarioById(scenarioId);
-    const participants: User[] = allUsers.filter(user => user.scenario_id == scenarioId);
+    try {
+      const scenario: Scenario = await this.scenarioService.findScenarioById(scenarioId);
+      const participants: User[] = allUsers.filter(user => user.scenario_id == scenarioId);
 
-    return { scenario: scenario, participants: participants };
+      return { scenario: scenario, participants: participants };
+    } catch (error) {
+      throw error;
+    }
   };
 }
 
