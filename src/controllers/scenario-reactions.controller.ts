@@ -11,9 +11,10 @@ class ScenarioReactionsController {
 
   public getScenarioReactions = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const allUsers: User[] = await this.usersService.findAllUser();
       const scenarioId = req.params.id;
 
-      const scenarioReaction: ScenarioReactionsDto = await this.toScenarioReaction(scenarioId);
+      const scenarioReaction: ScenarioReactionsDto = await this.toScenarioReaction(scenarioId, allUsers);
 
       res.status(200).json({ data: scenarioReaction, message: 'findOne' });
     } catch (error) {
@@ -24,21 +25,23 @@ class ScenarioReactionsController {
   public getScenariosReactions = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const scenarios: Scenario[] = await this.scenarioService.findAllScenarios();
+      const allUsers: User[] = await this.usersService.findAllUser();
+
       const scenariosReactions = new Array<ScenarioReactionsDto>();
       for (const scenario of scenarios) {
-        const scenarioReaction = await this.toScenarioReaction(scenario._id);
+        const scenarioReaction: ScenarioReactionsDto = await this.toScenarioReaction(scenario._id, allUsers);
         scenariosReactions.push(scenarioReaction);
       }
 
       res.status(200).json({ data: scenariosReactions, message: 'findAll' });
     } catch (error) {
       next(error);
+      res.status(500);
     }
   };
 
-  private toScenarioReaction = async scenarioId => {
+  private toScenarioReaction = async (scenarioId, allUsers) => {
     const scenario: Scenario = await this.scenarioService.findScenarioById(scenarioId);
-    const allUsers: User[] = await this.usersService.findAllUser();
 
     const participants: User[] = allUsers.filter(user => user.scenario_id === scenarioId);
 
