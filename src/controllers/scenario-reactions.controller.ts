@@ -42,8 +42,7 @@ class ScenarioReactionsController {
 
   private toScenarioReaction = async (scenarioId, allUsers) => {
     const scenario: Scenario = await this.scenarioService.findScenarioById(scenarioId);
-
-    const participants: User[] = allUsers.filter(user => user.scenario_id === scenarioId);
+    const participants: User[] = allUsers.filter(user => user.scenario_id == scenarioId);
 
     return { scenario: scenario, participants: participants };
   };
