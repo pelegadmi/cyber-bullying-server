@@ -323,10 +323,14 @@ definitions:
     type: object
     required:
         - nickname
+        - scenarioId
     properties:
       nickname:
         type: string
         description: user nickname
+      scenarioId:
+        type: string
+        description: scenario id
 
   update-user-dto:
     type: object

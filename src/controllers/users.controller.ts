@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import {AddUserMessageDto, CreateUserDto, UpdateUserDto} from '@dtos/users.dto';
+import {AddUserMessageDto, CreatedUserDto, CreateUserDto, UpdateUserDto} from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import UserService from '@services/users.service';
 
@@ -31,10 +31,11 @@ class UsersController {
     try {
       const userData: CreateUserDto = req.body;
       console.log(req.body);
-      const createUserData: User = await this.userService.createUser(userData);
+      const createUserData: CreatedUserDto = await this.userService.createUser(userData);
 
       res.status(201).json({ data: createUserData, message: 'created' });
     } catch (error) {
+      res.status(400).json({ message: 'Problem' });
       next(error);
     }
   };
@@ -58,7 +59,7 @@ class UsersController {
 
       res.status(200).json({ data: updatedUserData, message: 'updated' });
     } catch (error) {
-      // res.status(400).json({ message: 'Problem' });
+      res.status(400).json({ message: 'Problem' });
       next(error);
     }
   };

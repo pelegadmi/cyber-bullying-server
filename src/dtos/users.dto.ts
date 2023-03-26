@@ -6,6 +6,8 @@ import { User } from '@interfaces/users.interface';
 export class CreateUserDto {
   @IsString()
   public nickname: string;
+  @IsString()
+  public scenarioId: string;
 }
 
 export class CreatedUserDto {
@@ -21,6 +23,7 @@ export class UpdateUserDto {
   @IsString()
   public scenario_id: string;
 }
+
 export class AddUserMessageDto {
   public messages: Array<UserMessage>;
 }
