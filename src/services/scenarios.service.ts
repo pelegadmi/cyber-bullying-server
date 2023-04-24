@@ -26,7 +26,7 @@ class ScenarioService {
     return await this.scenarios.create({
       ...createScenarioDto,
       creationDate: Date.now(),
-      silentUsers: null,
+      silentUsers: new Array<string>(),
     });
   }
 
