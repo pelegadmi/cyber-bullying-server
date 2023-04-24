@@ -32,6 +32,8 @@ class ScenarioService {
 
   public async addSilentUsers(silentUser: string, scenarioId: string): Promise<Scenario> {
     const scenario = await this.findScenarioById(scenarioId);
+    if(isEmpty(scenario.silentUsers))
+          scenario.silentUsers=new Array<string>();
     scenario.silentUsers.push(silentUser);
 
     return this.scenarios.findByIdAndUpdate(scenarioId, {
