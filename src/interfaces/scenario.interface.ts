@@ -10,4 +10,5 @@ export interface Scenario {
   creationDate: Date;
   numberOfUsers: Number;
   messages: Array<ScenarioMessage>;
+  silentUsers: Array<string>;
 }

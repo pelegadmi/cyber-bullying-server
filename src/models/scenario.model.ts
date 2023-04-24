@@ -31,6 +31,10 @@ const scenarioSchema: Schema = new Schema({
     type: Array<ScenarioMessage>(),
     require: true,
   },
+  silentUsers: {
+    type: Array<string>,
+    require: true,
+  },
 });
 
 const scenarioModel = model<Scenario & Document>('Scenario', scenarioSchema);

@@ -3,7 +3,6 @@ import { isEmpty } from '@utils/util';
 import { Scenario } from '@interfaces/scenario.interface';
 import scenarioModel from '@models/scenario.model';
 import { CreateScenarioDto } from '@dtos/scenario.dto';
-import { ScenarioMessage } from '@interfaces/scenario-message.interface';
 
 class ScenarioService {
   public scenarios = scenarioModel;
@@ -27,9 +26,23 @@ class ScenarioService {
     return await this.scenarios.create({
       ...createScenarioDto,
       creationDate: Date.now(),
+      silentUsers: null,
     });
   }
 
+  public async addSilentUsers(silentUser: string, scenarioId: string): Promise<Scenario> {
+    const scenario = await this.findScenarioById(scenarioId);
+    scenario.silentUsers.push(silentUser);
+
+    return this.scenarios.findByIdAndUpdate(scenarioId, {
+      ...scenario,
+    });
+  }
+  public async getSilentUsers(scenarioId: string): Promise<Array<string>> {
+    const scenario = await this.findScenarioById(scenarioId);
+
+    return scenario.silentUsers;
+  }
   public async updateScenario(scenarioId: string, createScenarioDto: CreateScenarioDto): Promise<Scenario> {
     if (isEmpty(createScenarioDto)) throw new HttpException(400, 'createScenarioDto is empty');
 

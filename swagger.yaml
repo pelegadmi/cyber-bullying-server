@@ -5,9 +5,58 @@ tags:
   description: scenarios API
 - name: admin
   description: admin API
+- name: silent-users
+  description: silent-users API
 
 paths:
-# [GET] users
+  # [GET] users/id
+  /silent-users/{id}:
+    get:
+      tags:
+        - silent-users
+      summary: get Silent Users of a specific scenario
+      parameters:
+        - name: id
+          in: path
+          description: Scenario Id
+          required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [PUT] users/id
+    put:
+      tags:
+        - silent-users
+      summary: add a Silent Users to a specific scenario
+      parameters:
+        - name: id
+          in: path
+          description: scenario Id
+          required: true
+        - name: body
+          in: body
+          description: user's nickname
+          required: true
+          schema:
+            $ref: '#/definitions/silent-user-dto'
+
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+
+  # [GET] users
   /users:
     get:
       tags:
@@ -403,6 +452,14 @@ definitions:
         items:
           $ref: '#/definitions/update-user-dto'
         description: scenarios' participants
+  silent-user-dto:
+    type: object
+    required:
+      - nickname
+    properties:
+      nickname:
+        type: string
+        description: silent user's nickname
 
 schemes:
  - https
